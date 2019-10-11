@@ -37,6 +37,15 @@ describe('pos', () => {
     expect(result).toBe(2);
   });
 
+  it('should get count of given item according to count in purchase list', () => {
+    const itemBarcode = 'ITEM000003-2.5';
+    const purchaseList = ['ITEM000001', 'ITEM000001', 'ITEM000003-2.5', 'ITEM000003'];
+
+    const result = getItemCountAccordingToCount(itemBarcode, purchaseList);
+
+    expect(result).toBe(1);
+  });
+
 //   it('should print text', () => {
 
 //     const tags = [
