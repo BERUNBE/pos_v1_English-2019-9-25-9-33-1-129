@@ -1,0 +1,51 @@
+Case 1: (should return true when all purchase barcodes are valid)
+	Given: purchaseList = ['ITEM000001', 'ITEM000001', 'ITEM000003-2.5', 'ITEM000003'], inventory[] = ...
+	When: isAllBarcodesInProductInventory(purchaseList, inventory[])
+	Then: true
+
+Case 2: (should return false when all purchase barcodes are valid)
+	Given: purchaseList = ['ITEM000001', 'ITEM000001', 'ITEM000003-2.5', 'ITEM999999'], inventory[] = ...
+	When: isAllBarcodesInProductInventory(purchaseList, inventory[])
+	Then: false
+
+Case 3: (should get count of given item according to count in purchase list)
+	Given: purchaseList[i] = 'ITEM000001', 
+		purchaseList = ['ITEM000001', 'ITEM000001', 'ITEM000003-2.5', 'ITEM000003']
+	When: getItemCountAccordingToCount(purchaseList[i], purchaseList)
+	Then: 2
+
+Case 4: (should get count of given item according to count in purchase list, disregarding instances with dash)
+	Given: purchaseList[i] = 'ITEM000003-2.5', 
+		purchaseList = ['ITEM000001', 'ITEM000001', 'ITEM000003-2.5', 'ITEM000003']
+	When: getItemCountAccordingToCount(purchaseList[i], purchaseList)
+	Then: 1
+
+Case 5: (should get count of given item according to value after dash)
+	Given: purchaseList[i] = 'ITEM000003-2', inventory[x].unit = 'bottle'
+	When: getItemCountAccordingToDashNotation(purchaseList[i], inventory[x].unit)
+	Then: 2
+
+Case 6: (should get decimal count of given item according to value after dash, if item quantity is quantified by weight)
+	Given: purchaseList[i] = 'ITEM000003-2.5', inventory[x].unit = 'pounds'
+	When: getItemCountAccordingToDashNotation(purchaseList[i], inventory[x].unit)
+	Then: 2.5
+
+Case 7: (should disregard decimal count of given item according to value after dash, if item quantity is not quantified by weight)
+	Given: purchaseList[i] = 'ITEM000001-2.5', inventory[x].unit = 'bottle'
+	When: getItemCountAccordingToDashNotation(purchaseList[i], inventory[x].unit)
+	Then: 0
+
+Case 8: (should get plain subtotal of given item)
+	Given: purchaseList[i] = 'ITEM000001', inventory[x].price = 3.00, quantity = 2
+	When: getSubTotalPrices(purchaseList[i], inventory[x].price, quantity)
+	Then: 6.00
+
+Case 9: (should get discounted subtotal of given item with promotion)
+	Given: purchaseList[i] = 'ITEM000001', inventory[x].price = 3.00, quantity = 2
+	When: getSubTotalPricesWithPromotionsApplied(purchaseList[i], inventory[x].price, quantity)
+	Then: 3.00
+
+Case 10: (should get plain subtotal of given item with no promotion)
+	Given: purchaseList[i] = 'ITEM000004', inventory[x].price = 2.00, quantity = 2
+	When: getSubTotalPricesWithPromotionsApplied(purchaseList[i], inventory[x].price, quantity)
+	Then: 4.00
