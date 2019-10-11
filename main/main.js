@@ -11,3 +11,7 @@ function isAllBarcodesInProductInventory(purchaseList, inventory) {
     }
     return true;
 }
+
+function getItemCountAccordingToCount(itemBarcode, purchaseList) {
+    return purchaseList.filter(barcode => barcode == itemBarcode).length;
+}
