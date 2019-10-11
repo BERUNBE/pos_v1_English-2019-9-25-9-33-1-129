@@ -1,3 +1,13 @@
 'use strict';
 
-//TODO: Implement the exercise requirements in this file and remove this comment
+function isAllBarcodesInProductInventory(purchaseList, inventory) {
+    const inventoryBarcodes = inventory.map(item => item.barcode);
+    console.log(purchaseList);
+    console.log(inventoryBarcodes);
+    for(let barcode of purchaseList) {
+        if (!inventoryBarcodes.includes(barcode)) {
+            return false;
+        }
+    }
+    return true;
+}
