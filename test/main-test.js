@@ -16,6 +16,18 @@ describe('pos', () => {
     expect(result).toBe(true);
   });
 
+  it('should return false when purchases includes invalid barcode', () => {
+    const tags = [
+      'ITEM000001',
+      'ITEM000001',
+      'ITEM000002',
+      'ITEM999999'
+    ];
+    const result = isAllBarcodesInProductInventory(tags, inventory);
+
+    expect(result).toBe(false);
+  });
+
 //   it('should print text', () => {
 
 //     const tags = [
